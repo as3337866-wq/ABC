@@ -153,3 +153,86 @@ export default function NavbarBanner() {
     </header>
   );
 }
+
+
+
+// "use client";
+
+// import { useState } from "react";
+// import Loader from "@/components/Loader/Loader";
+// import Navbar from "@/components/navbar";
+// import Hero from "@/components/hero";
+// import About from "@/components/about";
+// import Tracks from "@/components/tracks";
+// import Gallery from "@/components/gallery";
+// import Sponsors from "@/components/sponsors";
+// import Faq from "@/components/faq";
+// import Footer from "@/components/footer";
+// import Timeline from "@/components/timeline";
+// import SharedBackground from "@/components/SharedBackground";
+
+// export default function Page() {
+//   const [showHome, setShowHome] = useState(false);
+//   const [username, setUsername] = useState(null);
+
+//   return (
+//     <>
+//       <style jsx global>{`
+//         html {
+//           scroll-snap-type: y proximity;
+//         }
+//       `}</style>
+
+//       {!showHome && (
+//         <Loader
+//           onComplete={(name) => {
+//             setUsername(name);
+//             setShowHome(true);
+//           }}
+//         />
+//       )}
+
+//       {showHome && (
+//         <>
+//           <header className="fixed top-0 right-0 left-0 z-50 pt-4">
+//             <Navbar />
+//           </header>
+
+//           <main className="relative bg-neutral-950">
+            
+//             {/* 1. HERO LAYER (Bottom-most layer at the top) */}
+//             {/* z-10 ensures it stays behind the main content */}
+//             <section id="home" className="relative z-10 snap-start">
+//               <Hero />
+//             </section>
+
+//             {/* 2. MAIN CONTENT LAYER (Top-most layer) */}
+//             {/* z-30 makes this overlap EVERYTHING.
+//                 -mt-[100dvh] pulls it up to slide directly over the Hero spacer! */}
+//             <div className="relative z-30 -mt-[100dvh] bg-neutral-950 snap-start shadow-[0_-20px_50px_rgba(0,0,0,0.9),0_20px_50px_rgba(0,0,0,0.9)]">
+//               <SharedBackground />
+//               <div className="relative z-10">
+//                 <section id="about"><About /></section>
+//                 <section id="tracks"><Tracks /></section>
+//                 <section id="timeline"><Timeline /></section>
+//                 <section id="gallery" className="py-20"><Gallery /></section>
+//                 <section id="sponsors"><Sponsors /></section>
+//                 <section id="faq"><Faq /></section>
+//               </div>
+//             </div>
+
+//             {/* 3. FOOTER LAYER (Middle layer at the bottom) */}
+//             {/* z-20 means it is BEHIND the Main Content, but the Main Content scrolls away to reveal it.
+//                 -mt-[100dvh] ensures it begins directly behind the final FAQ section. */}
+//             <section id="footer" className="relative z-20 -mt-[100dvh] h-[200dvh] w-full pointer-events-none">
+//               <div className="sticky bottom-0 h-[100dvh] w-full pointer-events-auto overflow-hidden bg-black">
+//                 <Footer />
+//               </div>
+//             </section>
+
+//           </main>
+//         </>
+//       )}
+//     </>
+//   );
+// }
