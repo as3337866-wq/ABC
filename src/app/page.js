@@ -53,8 +53,8 @@ export default function Page() {
             <div className="relative z-30 -mt-[100dvh] bg-neutral-950 snap-start shadow-[0_20px_50px_rgba(0,0,0,1)]">
               <SharedBackground />
               
-              {/* bg-neutral-950 guarantees a solid background so the footer doesn't prematurely bleed through */}
-              <div className="relative z-10 bg-neutral-950">
+              {/* Changed bg-neutral-950 to bg-transparent to let the particles show through */}
+              <div className="relative z-10 bg-transparent">
                 <section id="about"><About /></section>
                 <section id="tracks"><Tracks /></section>
                 <section id="timeline"><Timeline /></section>

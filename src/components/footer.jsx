@@ -23,16 +23,21 @@ const team_members = [
 
 const Team_card = ({ image_src, role, name }) => {
   return (
-    <div className="w-32 h-[160px] bg-[#e5f4f8] p-2 pb-3 shadow-[0_8px_30px_rgba(0,0,0,0.5)] flex flex-col items-center rounded-sm">
-      <div className="w-full h-28 relative overflow-hidden border-[1.5px] border-[#3b6a8b] bg-gray-300">
-        <Image src={image_src} alt={name} fill className="object-cover" />
+    <div className="group w-32 h-[168px] bg-[#f9f9f9] p-2 flex flex-col items-center rounded-sm transition-all duration-300 drop-shadow-[0_15px_30px_rgba(255,140,66,0.3)] hover:-translate-y-3 hover:scale-105 hover:drop-shadow-[0_20px_40px_rgba(255,140,66,0.7)]">
+      <div className="w-full h-[110px] relative overflow-hidden bg-[#222]">
+        <Image 
+          src={image_src} 
+          alt={name} 
+          fill 
+          className="object-cover transition-transform duration-500 group-hover:scale-110" 
+        />
       </div>
-      <div className="flex flex-col items-center justify-center mt-auto w-full text-gray-800">
-        <span className="text-[10px] capitalize tracking-wide font-medium text-gray-700 mt-1">
-          {role}
-        </span>
-        <span className="text-[22px] font-[cursive] mt-[-2px] text-[#1a202c] leading-none">
+      <div className="flex flex-col items-center justify-center mt-auto pb-1 w-full text-gray-800">
+        <span className="text-[20px] font-[cursive] text-[#1a1a1a] leading-none mb-[2px]">
           {name}
+        </span>
+        <span className="text-[8px] uppercase tracking-widest font-bold text-gray-500 transition-colors duration-300 group-hover:text-orange-600">
+          {role}
         </span>
       </div>
     </div>
@@ -57,14 +62,14 @@ const gmail_svg = () => (
 );
 
 const social_items = [
-  { name: "Instagram", icon: instagram_svg, url: "#", hover_color: "hover:text-[#E1306C] hover:border-[#E1306C] hover:bg-[#E1306C]/10" },
-  { name: "Twitter", icon: twitter_svg, url: "#", hover_color: "hover:text-white hover:border-white hover:bg-white/10" },
-  { name: "LinkedIn", icon: linkedin_svg, url: "#", hover_color: "hover:text-[#0A66C2] hover:border-[#0A66C2] hover:bg-[#0A66C2]/10" },
-  { name: "YouTube", icon: youtube_svg, url: "#", hover_color: "hover:text-[#FF0000] hover:border-[#FF0000] hover:bg-[#FF0000]/10" },
-  { name: "Gmail", icon: gmail_svg, url: "#", hover_color: "hover:text-[#EA4335] hover:border-[#EA4335] hover:bg-[#EA4335]/10" },
+  { name: "Instagram", icon: instagram_svg, url: "#", colors: "text-[#E1306C] border-[#E1306C]/50 bg-[#E1306C]/10 drop-shadow-[0_0_10px_rgba(225,48,108,0.3)] hover:bg-[#E1306C] hover:text-white hover:border-[#E1306C] hover:drop-shadow-[0_0_20px_rgba(225,48,108,0.8)]" },
+  { name: "Twitter", icon: twitter_svg, url: "#", colors: "text-[#1DA1F2] border-[#1DA1F2]/50 bg-[#1DA1F2]/10 drop-shadow-[0_0_10px_rgba(29,161,242,0.3)] hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2] hover:drop-shadow-[0_0_20px_rgba(29,161,242,0.8)]" },
+  { name: "LinkedIn", icon: linkedin_svg, url: "#", colors: "text-[#0A66C2] border-[#0A66C2]/50 bg-[#0A66C2]/10 drop-shadow-[0_0_10px_rgba(10,102,194,0.3)] hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] hover:drop-shadow-[0_0_20px_rgba(10,102,194,0.8)]" },
+  { name: "YouTube", icon: youtube_svg, url: "#", colors: "text-[#FF0000] border-[#FF0000]/50 bg-[#FF0000]/10 drop-shadow-[0_0_10px_rgba(255,0,0,0.3)] hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000] hover:drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]" },
+  { name: "Gmail", icon: gmail_svg, url: "#", colors: "text-[#EA4335] border-[#EA4335]/50 bg-[#EA4335]/10 drop-shadow-[0_0_10px_rgba(234,67,53,0.3)] hover:bg-[#EA4335] hover:text-white hover:border-[#EA4335] hover:drop-shadow-[0_0_20px_rgba(234,67,53,0.8)]" },
 ];
 
-const footer_component = () => {
+const Footer = () => {
   const added_rotation = useMotionValue(0);
   const smooth_rotation = useSpring(added_rotation, { damping: 50, stiffness: 400 });
 
@@ -99,15 +104,19 @@ const footer_component = () => {
   }, [added_rotation]);
 
   return (
-    <footer className="relative w-full h-[100dvh] min-h-[600px] overflow-hidden bg-[#050505]/80 text-white flex flex-col items-center border-t border-white/10">
+    // Added glowing top border with shadow
+    <footer className="relative w-full h-[100dvh] min-h-[600px] overflow-hidden bg-[#050505]/80 text-white flex flex-col items-center border-t border-orange-500/20 shadow-[0_-15px_40px_rgba(255,140,66,0.1)]">
       
       {/* Background Particles */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-60">
         <SharedBackground id="footer-particles" />
       </div>
 
-      {/* 1. Conveyor Belt Arc - Arc unchanged */}
-      <div className="absolute z-10 left-1/2 -translate-x-1/2 w-[2600px] h-[2600px] pointer-events-none opacity-90 top-[140px] lg:top-[160px]">
+      {/* NEW: Ambient Base Glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-t from-orange-600/20 to-transparent blur-[120px] pointer-events-none z-0 rounded-full translate-y-1/2" />
+
+      {/* Rotating Polaroid Arc */}
+      <div className="absolute z-10 left-1/2 -translate-x-1/2 w-[2600px] h-[2600px] pointer-events-none opacity-90 top-[110px] lg:top-[130px]">
         <motion.div style={{ rotate: smooth_rotation }} className="w-full h-full relative">
           <motion.div
             animate={{ rotate: 360 }}
@@ -128,23 +137,27 @@ const footer_component = () => {
         </motion.div>
       </div>
 
-      {/* 2. Central Layout Stack - Removed rigid pt-[330px], added mt-auto to anchor properly */}
+      {/* Main Bottom Content Layer */}
       <div className="relative z-20 flex flex-col items-center w-full mt-auto pb-6 px-4 max-w-4xl">
-        
-        {/* Top block (Map + Icons) - Reduced mb slightly to keep things tight vertically */}
-        <div className="flex flex-col items-center gap-5 w-full mb-6 lg:mb-8">
-          {/* Map - Dropped height slightly to guarantee it fits entirely */}
-          <div className="w-full max-w-[450px] h-[120px] lg:h-[140px] bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)] relative group p-1.5">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none rounded-[1rem]"></div>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3413.863620408042!2d73.10204687466346!3d19.000230854347873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7e83a36fbf179%3A0xbbb0905051e8c56e!2sAnjuman-I-Islam's%20Kalsekar%20Technical%20Campus!5e1!3m2!1sen!2sin!4v1772359776194!5m2!1sen!2sin"
-              width="100%" height="100%" style={{ border: 0, borderRadius: "0.8rem" }}
-              className="w-full h-full object-cover transition-all duration-700"
-              allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+        <div className="flex flex-col items-center gap-6 w-full mb-6 lg:mb-8">
+          
+          {/* UPGRADED: Glowing Map Frame */}
+          <div className="relative w-full max-w-[450px] h-[120px] lg:h-[140px] group">
+            {/* Animated underlying glow */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+            
+            {/* Map Container */}
+            <div className="relative h-full w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.8)] transition-all duration-500 hover:-translate-y-1 p-1">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3413.863620408042!2d73.10204687466346!3d19.000230854347873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7e83a36fbf179%3A0xbbb0905051e8c56e!2sAnjuman-I-Islam's%20Kalsekar%20Technical%20Campus!5e1!3m2!1sen!2sin!4v1772359776194!5m2!1sen!2sin"
+                width="100%" height="100%" style={{ border: 0, borderRadius: "0.6rem" }}
+                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
           </div>
 
-          {/* Social Icons Dock - Expanded gap to spread them out! */}
+          {/* Social Icons */}
           <div className="flex flex-wrap justify-center gap-6 lg:gap-17">
             {social_items.map((item) => (
               <a 
@@ -152,7 +165,7 @@ const footer_component = () => {
                 href={item.url} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className={`w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 text-white/50 shadow-lg transition-all duration-300 hover:-translate-y-2 cursor-pointer ${item.hover_color}`}
+                className={`w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center rounded-2xl border transition-all duration-300 hover:-translate-y-2 cursor-pointer ${item.colors}`}
                 title={item.name}
               >
                 <div className="w-5 h-5 lg:w-6 lg:h-6">
@@ -163,20 +176,37 @@ const footer_component = () => {
           </div>
         </div>
 
-        {/* 3. Bottom text section */}
+        {/* UPGRADED: Bottom Signature & Text */}
         <div className="w-full text-center flex flex-col items-center">
-          <div className="w-full max-w-2xl h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-3"></div>
-          <p className="text-sm lg:text-base font-normal tracking-wide text-white/90 flex items-center gap-1.5">
-            Made With <span className="inline-block animate-pulse text-red-500 text-lg lg:text-xl">❤️</span> By <span className="font-bold">Algo Team</span>
+          
+          {/* Signature Decorative Line */}
+          <div className="flex items-center justify-center w-full max-w-2xl mb-4 mt-2">
+            <div className="h-px w-full bg-gradient-to-r from-transparent via-orange-500/50 to-transparent" />
+            <div className="mx-4 h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse shadow-[0_0_10px_rgba(255,140,66,0.8)]" />
+            <div className="h-px w-full bg-gradient-to-l from-transparent via-amber-500/50 to-transparent" />
+          </div>
+
+          <p className="text-sm lg:text-base font-normal tracking-wide text-white/90 flex items-center justify-center gap-1.5">
+            Made With <span className="inline-block animate-pulse text-red-500 text-lg lg:text-xl drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]">❤️</span> By 
+            <span className="font-bold bg-gradient-to-r from-orange-400 via-amber-400 to-orange-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-[gradient_3s_linear_infinite]">
+              Algo Team
+            </span>
           </p>
-          <p className="text-[10px] lg:text-xs text-white/40 font-extralight tracking-wider mt-1">
+          <p className="text-[10px] lg:text-xs text-white/40 font-extralight tracking-wider mt-1.5">
             © 2026 Algorithm 10. All rights reserved. Panvel, Maharashtra.
           </p>
         </div>
-        
       </div>
+
+      <style jsx>{`
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `}</style>
     </footer>
   );
 };
 
-export default footer_component;
+export default Footer;

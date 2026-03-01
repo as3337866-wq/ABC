@@ -8,7 +8,7 @@ import {
   useMotionTemplate 
 } from "framer-motion";
 
-const FAQ_ITEMS = [
+const faq_items = [
   {
     q: "What is Algorithm 10.0?",
     a: "Algorithm 10.0 is a 32-hour national-level hackathon that brings together innovators, students, and tech enthusiasts from across the country to explore futuristic technologies and solve real-world problems.",
@@ -52,57 +52,48 @@ const FAQ_ITEMS = [
 ];
 
 export default function Faq() {
-  const containerRef = useRef(null);
-  const [openIndex, setOpenIndex] = useState(null);
+  const container_ref = useRef(null);
+  const [open_index, set_open_index] = useState(null);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
+  const { scrollYProgress: scroll_y_progress } = useScroll({
+    target: container_ref,
     offset: ["start end", "end start"],
   });
 
   // --- LEFT SIDE ANIMATIONS ---
-  // Fades in early (0.2), stays visible, fades out VERY late (0.95)
-  const leftOpacity = useTransform(
-    scrollYProgress,
-    [0.2, 0.35, 0.9, 0.98],
+  const left_opacity = useTransform(
+    scroll_y_progress,
+    [0.05, 0.15, 0.85, 0.95],
     [0, 1, 1, 0]
   );
-  const leftBlur = useTransform(scrollYProgress, [0.9, 0.98], [0, 8]);
-  const leftFilter = useMotionTemplate`blur(${leftBlur}px)`;
+  const left_blur = useTransform(scroll_y_progress, [0.85, 0.95], [0, 8]);
+  const left_filter = useMotionTemplate`blur(${left_blur}px)`;
 
   // --- RIGHT SIDE ANIMATIONS ---
-  // Fades in early (0.2), Dissolves when the section is nearly done (0.85)
-  const rightOpacity = useTransform(
-    scrollYProgress,
-    [0.2, 0.35, 0.85, 0.95],
+  const right_opacity = useTransform(
+    scroll_y_progress,
+    [0.05, 0.15, 0.85, 0.95],
     [0, 1, 1, 0]
   );
-  const rightBlur = useTransform(scrollYProgress, [0.85, 0.95], [0, 12]);
-  const rightScale = useTransform(scrollYProgress, [0.85, 0.95], [1, 0.92]);
-  const rightFilter = useMotionTemplate`blur(${rightBlur}px)`;
+  const right_blur = useTransform(scroll_y_progress, [0.85, 0.95], [0, 12]);
+  const right_scale = useTransform(scroll_y_progress, [0.85, 0.95], [1, 0.95]);
+  const right_filter = useMotionTemplate`blur(${right_blur}px)`;
 
-  // Gradient for borders
-  const gradientColors = "linear-gradient(90deg, #8B0000, #FF4500, #FF7E00, #FFA500, #FFD580, #FF7E00, #5C1A00)";
+  const gradient_colors = "linear-gradient(90deg, #8B0000, #FF4500, #FF7E00, #FFA500, #FFD580, #FF7E00, #5C1A00)";
 
   return (
     <section 
-      ref={containerRef} 
-      // Ensure it has a solid background color (e.g. bg-neutral-950)
-      className="relative bg-neutral-950 text-white py-64 lg:py-96 overflow-hidden"
+      ref={container_ref} 
+      className="relative bg-transparent text-white py-24 md:py-32"
     >
-      {/* CRITICAL: No motion.div wrapper here. Pure CSS container. */}
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
           
           {/* --- LEFT SIDE: STICKY CONTAINER --- */}
-          {/* 1. sticky: Enables sticky behavior
-             2. top-1/2 -translate-y-1/2: Centers it vertically in viewport
-             3. self-start: CRITICAL. Prevents the div from stretching to full height of parent.
-          */}
-          <div className="lg:sticky lg:top-1/2 lg:-translate-y-1/2 lg:self-start">
-            {/* Inner Motion Div for Opacity/Blur ONLY */}
+          {/* Changed top-1/3 and -translate-y-1/3 to 1/2 so it sits perfectly in the middle */}
+          <div className="lg:sticky lg:top-1/2 lg:-translate-y-1/2 lg:self-start z-10">
             <motion.div 
-              style={{ opacity: leftOpacity, filter: leftFilter }}
+              style={{ opacity: left_opacity, filter: left_filter }}
               className="space-y-6"
             >
               <div>
@@ -121,17 +112,16 @@ export default function Faq() {
           </div>
 
           {/* --- RIGHT SIDE: SCROLLING CONTENT --- */}
-          {/* Scrolls naturally, but fades/dissolves via transforms */}
           <motion.div 
             style={{ 
-              opacity: rightOpacity, 
-              filter: rightFilter, 
-              scale: rightScale 
+              opacity: right_opacity, 
+              filter: right_filter, 
+              scale: right_scale 
             }}
-            className="space-y-6 w-full"
+            className="space-y-6 w-full relative z-20"
           >
-            {FAQ_ITEMS.map((item, i) => {
-              const isOpen = openIndex === i;
+            {faq_items.map((item, i) => {
+              const isOpen = open_index === i;
               return (
                 <div 
                   key={i} 
@@ -142,7 +132,7 @@ export default function Faq() {
                       isOpen ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                     }`}
                     style={{
-                      backgroundImage: gradientColors,
+                      backgroundImage: gradient_colors,
                       backgroundSize: "200% 100%",
                       padding: "3px", 
                       WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
@@ -154,19 +144,21 @@ export default function Faq() {
 
                   <div className="relative z-10">
                     <button
-                      onClick={() => setOpenIndex(isOpen ? null : i)}
-                      className="flex w-full items-center justify-between p-7 md:p-8 text-left outline-none"
+                      onClick={() => set_open_index(isOpen ? null : i)}
+                      className="flex w-full items-center justify-between p-7 md:p-8 text-left outline-none cursor-pointer"
                     >
-                      <span className={`text-lg md:text-xl font-semibold transition-colors duration-300 ${
+                      <span className={`text-lg md:text-xl font-semibold transition-colors duration-300 pr-4 ${
                         isOpen ? "text-orange-500" : "text-gray-300 group-hover:text-white"
                       }`}>
                         {item.q}
                       </span>
                       <motion.div 
                         animate={{ rotate: isOpen ? 180 : 0 }}
-                        className={`text-2xl transition-colors ${isOpen ? "text-orange-500" : "text-gray-600"}`}
+                        className={`flex-shrink-0 transition-colors ${isOpen ? "text-orange-500" : "text-gray-600"}`}
                       >
-                        ⌄
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
                       </motion.div>
                     </button>
 

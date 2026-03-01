@@ -35,8 +35,7 @@ const SponsorCard = ({ name, logo, delay }) => {
   return (
     <div
       ref={cardRef}
-      // Height increased to h-[280px]
-      className="relative mx-auto h-[280px] w-full max-w-[280px] cursor-pointer"
+      className="group relative mx-auto h-[280px] w-full max-w-[280px] cursor-pointer"
       style={{
         perspective: "1000px",
         animation: `fadeInUp 0.8s ease-out ${delay}s both`,
@@ -51,24 +50,17 @@ const SponsorCard = ({ name, logo, delay }) => {
           transformStyle: "preserve-3d",
           transform: `rotateX(${transform.rotateX}deg) rotateY(${transform.rotateY}deg) scale(${isHovered ? 1.05 : 1})`,
           boxShadow: isHovered
-            ? "0 25px 50px -12px rgba(0,0,0,0.5), 0 0 30px rgba(255,140,66,0.2)"
+            ? "0 25px 50px -12px rgba(0,0,0,0.5), 0 0 30px rgba(255,140,66,0.3)"
             : "0 10px 30px -10px rgba(0,0,0,0.5)",
         }}
       >
-        {/* --- Moving Border (Always Active Scanner) --- */}
-        <div
-          className="absolute inset-[-1px] overflow-hidden rounded-2xl"
-          style={{ transform: "translateZ(-2px)" }}
-        >
-          {/* Rotating gradient */}
-          <div
-            className={`absolute inset-[-50%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(transparent_0deg,rgba(255,140,66,0.4)_60deg,transparent_180deg)] ${isHovered ? "opacity-100" : "opacity-60"}`}
-          />
-          <div className="absolute inset-[1px] rounded-2xl bg-[#0a0a0a]" />
+        {/* --- Moving Trail Border --- */}
+        <div className="absolute -inset-[2px] overflow-hidden rounded-2xl z-0">
+          <div className="absolute top-1/2 left-1/2 aspect-square w-[200%] -translate-x-1/2 -translate-y-1/2 animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_270deg,#ff8c42_360deg)] opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+          <div className="absolute inset-[2px] rounded-[14px] bg-[#0a0a0a]" />
         </div>
 
         {/* --- Card Surface Texture --- */}
-        {/* 1. Base Grid (Always visible) */}
         <div
           className="pointer-events-none absolute inset-0 z-0 opacity-20"
           style={{
@@ -77,31 +69,17 @@ const SponsorCard = ({ name, logo, delay }) => {
           }}
         />
 
-        {/* 2. Breathing Glow (Simulates power/life when idle) */}
+        {/* Breathing Glow (Simulates power/life when idle) */}
         <div
           className={`pointer-events-none absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/10 blur-[50px] transition-opacity duration-700 ${isHovered ? "opacity-0" : "animate-pulse"}`}
         />
 
-        {/* 3. Interactive Spotlight (On Hover) */}
+        {/* Interactive Spotlight (On Hover) */}
         <div
-          className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
+          className="pointer-events-none absolute inset-0 z-0 rounded-2xl transition-opacity duration-300"
           style={{
             opacity: isHovered ? 1 : 0,
-            background: `radial-gradient(300px circle at ${position.x}px ${position.y}px, rgba(255,140,66,0.1), transparent 50%)`,
-          }}
-        />
-
-        {/* 4. Active Dots (On Hover) */}
-        <div
-          className="pointer-events-none absolute inset-0 z-10"
-          style={{
-            backgroundImage:
-              "radial-gradient(#ff8c42 1.5px, transparent 1.5px)",
-            backgroundSize: "16px 16px",
-            opacity: isHovered ? 1 : 0,
-            transition: "opacity 0.3s",
-            maskImage: `radial-gradient(180px circle at ${position.x}px ${position.y}px, black, transparent)`,
-            WebkitMaskImage: `radial-gradient(180px circle at ${position.x}px ${position.y}px, black, transparent)`,
+            background: `radial-gradient(300px circle at ${position.x}px ${position.y}px, rgba(255,140,66,0.15), transparent 50%)`,
           }}
         />
 
@@ -119,7 +97,7 @@ const SponsorCard = ({ name, logo, delay }) => {
               alt={`${name} logo`}
               className={`h-auto max-h-full w-auto max-w-[75%] object-contain drop-shadow-lg filter transition-all duration-300 ${
                 isHovered
-                  ? "scale-110 drop-shadow-[0_0_20px_rgba(255,140,66,0.4)]"
+                  ? "scale-110 drop-shadow-[0_0_20px_rgba(255,140,66,0.6)]"
                   : "scale-100"
               } `}
             />
@@ -132,7 +110,7 @@ const SponsorCard = ({ name, logo, delay }) => {
             </h3>
             {/* Decorative line */}
             <div
-              className={`h-0.5 rounded-full bg-gradient-to-r from-transparent via-orange-500 to-transparent transition-all duration-300 ${isHovered ? "w-24 opacity-100" : "w-12 opacity-30"}`}
+              className={`mt-1 h-0.5 rounded-full bg-gradient-to-r from-transparent via-orange-500 to-transparent transition-all duration-300 ${isHovered ? "w-24 opacity-100" : "w-12 opacity-30"}`}
             />
           </div>
         </div>
@@ -174,18 +152,34 @@ export default function Sponsors() {
 
   return (
     <section className="relative min-h-[60vh] overflow-hidden bg-transparent px-4 py-24">
-      {/* Background Ambience has been REMOVED so SharedBackground particles show through */}
-
       <div className="relative z-10 mx-auto max-w-7xl">
-        {/* Header */}
-        <div className="mb-20 text-center">
-          <h2 className="mb-6 text-4xl font-bold tracking-tight text-white md:text-5xl">
+        
+        {/* Gallery-Style Header */}
+        <div className="mb-20 text-center transform transition-all duration-1000 hover:scale-105">
+          {/* Decorative Line Above */}
+          <div className="flex items-center justify-center mb-6">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent via-orange-500 to-transparent" />
+            <div className="mx-4 h-2 w-2 rounded-full bg-orange-500 animate-pulse" />
+            <div className="h-px w-12 bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
+          </div>
+
+          {/* Main Heading with Gradient and Glow */}
+          <h2 className="mb-4 text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 bg-clip-text text-transparent relative inline-block">
             Our Partners
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 blur-2xl opacity-30 -z-10" />
           </h2>
-          <div className="mx-auto mb-6 h-1 w-20 rounded-full bg-gradient-to-r from-orange-600 to-amber-500" />
-          <p className="mx-auto max-w-2xl text-lg text-neutral-400">
-            Fueling innovation through collaboration.
+          
+          {/* Subtitle */}
+          <p className="mx-auto max-w-2xl text-lg text-gray-400 leading-relaxed mt-2">
+            Fueling innovation through collaboration and technology.
           </p>
+
+          {/* Decorative Line Below */}
+          <div className="flex items-center justify-center mt-6">
+            <div className="h-px w-24 bg-gradient-to-r from-orange-500/50 to-transparent" />
+            <div className="mx-3 h-1 w-1 rounded-full bg-amber-500" />
+            <div className="h-px w-24 bg-gradient-to-l from-amber-500/50 to-transparent" />
+          </div>
         </div>
 
         {/* Cards Grid */}
@@ -204,4 +198,4 @@ export default function Sponsors() {
       `}</style>
     </section>
   );
-}
+} 

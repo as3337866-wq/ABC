@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useMemo, useRef, useCallback } from "react";
 import { useGesture } from "@use-gesture/react";
 
@@ -982,12 +983,15 @@ export default function DomeGallery({
             }}
           />
 
+          {/* FIX: Removed backdropFilter: "blur(3px)" here! 
+            Using backdrop-filter inside a 3D perspective context destroys the Z-axis 
+            and forces the browser to flatten everything into a 2D layer. 
+          */}
           <div
             className="pointer-events-none absolute inset-0 z-[3] m-auto"
             style={{
               WebkitMaskImage: `radial-gradient(circle, transparent 70%, black 90%)`,
               maskImage: `radial-gradient(circle, transparent 70%, black 90%)`,
-              backdropFilter: "blur(3px)",
             }}
           />
 
@@ -996,12 +1000,14 @@ export default function DomeGallery({
             className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center"
             style={{ padding: "var(--viewer-pad)" }}
           >
+            {/* FIX: Changed scrim background from a blur filter to a solid dark overlay 
+              to prevent 3D clipping bugs when clicking to enlarge an image. 
+            */}
             <div
               ref={scrimRef}
               className="scrim pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-500"
               style={{
-                background: "rgba(0, 0, 0, 0.4)",
-                backdropFilter: "blur(3px)",
+                background: "rgba(0, 0, 0, 0.8)",
               }}
             />
             <div

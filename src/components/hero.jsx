@@ -397,7 +397,7 @@ export default function Hero() {
     springConfig
   );
 
-  const hackathonDate = "2026-02-15T00:00:00";
+  const hackathonDate = "2026-04-03T00:00:00";
 
   const [username, setUsername] = useState(null);
 
