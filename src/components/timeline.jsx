@@ -186,12 +186,12 @@ const SectionContent = ({ section, isCurrent, index }) => {
 // ==================== Main Timeline Component ====================
 const Timeline = () => {
   const sections = [
-    { number: { line1: "JAN", line2: "12" }, title: "Registrations Start", description: "Registration opens. Gather your team and sign up." },
-    { number: { line1: "JAN", line2: "24" }, title: "Registrations Close", description: "Deadline day. Ensure your team is registered." },
-    { number: { line1: "JAN", line2: "26" }, title: "Round 1: Quiz", description: "Quiz round. Only team lead allowed. Timing TBA." },
-    { number: { line1: "JAN", line2: "27" }, title: "Shortlist Announced", description: "By 9 AM. Selected teams listed on website & WhatsApp groups." },
-    { number: { line1: "JAN", line2: "30" }, title: "Hackathon Starts", description: "The 32-hour offline hackathon begins." },
-    { number: { line1: "JAN", line2: "31" }, title: "Hackathon Ends", description: "Competition concludes and winners declared." },
+    { number: { line1: "MAR", line2: "05" }, title: "Registrations Start", description: "Registration opens. Gather your team and sign up." },
+    { number: { line1: "MAR", line2: "28" }, title: "Registrations Close", description: "Deadline day. Ensure your team is registered." },
+    { number: { line1: "MAR", line2: "28" }, title: "Problem Statement Live", description: "Challenges revealed.Choose your domain and plan your solution." },
+    { number: { line1: "MAR", line2: "29" }, title: "Round 1: Quiz", description: "Quiz round. Only team lead allowed. Timing TBA." },
+    { number: { line1: "APR", line2: "03" }, title: "Hackathon Starts", description: "The 32-hour offline hackathon begins." },
+    { number: { line1: "APR", line2: "04" }, title: "Hackathon Ends", description: "Competition concludes and winners declared." },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);

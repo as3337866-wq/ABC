@@ -5,20 +5,28 @@ import Image from "next/image";
 import SharedBackground from "./SharedBackground";
 
 const base_team_members = [
-  { image: "/team/member1.png", role: "VP Frontend", name: "Hubert" },
-  { image: "/team/member2.jpg", role: "Logistics", name: "Baron" },
-  { image: "/team/member3.jpg", role: "Logistics", name: "Jaclyn" },
-  { image: "/team/member4.png", role: "Design", name: "Vicky" },
-  { image: "/team/member5.png", role: "Design", name: "Cindy" },
-  { image: "/team/member6.jpg", role: "Advisor", name: "MG" },
-  { image: "/team/member7.png", role: "President", name: "Yannick" },
-  { image: "/team/member8.jpg", role: "VP Finance", name: "Maggie" },
-  { image: "/team/member9.png", role: "VP Events", name: "Angela" },
-  { image: "/team/member10.png", role: "VP Purchasing", name: "Samiyah" },
+  { image: "/team/M-member1.webp", role: "Management", name: "Qaif" },
+  { image: "/team/MM-member1.webp", role: "Media & Marketinig", name: "Arman" },
+  { image: "/team/S-member1.webp", role: "Sponsorship", name: "Umar" },
+  { image: "/team/T-member2.webp", role: "Technical", name: "Asim" },
+  { image: "/team/T-member3.webp", role: "Technical", name: "Mueez" },
+  { image: "/team/T-member4.webp", role: "Technical", name: "Iffah" },
+  { image: "/team/T-member5.webp", role: "Technical", name: "Owais" },
+  { image: "/team/DO-member1.webp", role: "Documentation", name: "Irfan" },
+  { image: "/team/DO-member2.webp", role: "Documentation", name: "Ayesha" },
+  { image: "/team/D-member1.webp", role: "Design", name: "Aarhaan" },
+  { image: "/team/D-member2.webp", role: "Design", name: "Umair" },
+  { image: "/team/D-member3.webp", role: "Design", name: "Sumaiya" },
+  { image: "/team/D-member4.webp", role: "Design", name: "Humaira" },
+  { image: "/team/D-member5.webp", role: "Design", name: "Jishan" },
+  { image: "/team/D-member6.webp", role: "Design", name: "Affan" },
+  { image: "/team/DE-member1.webp", role: "Decoration", name: "Yahya" },
+  { image: "/team/DE-member2.webp", role: "Decoration", name: "Afrah" },
+  { image: "/team/DE-member3.webp", role: "Decoration", name: "Ashish" },
 ];
 
 const team_members = [
-  ...base_team_members, ...base_team_members, ...base_team_members, ...base_team_members, 
+  ...base_team_members, ...base_team_members, 
 ];
 
 const Team_card = ({ image_src, role, name }) => {
@@ -77,7 +85,7 @@ const Footer = () => {
     const handle_wheel = (e) => {
       const is_at_bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 150;
       if (is_at_bottom) {
-        added_rotation.set(added_rotation.get() + e.deltaY * 0.05); 
+        added_rotation.set(added_rotation.get() - e.deltaY * 0.05); 
       }
     };
 
@@ -87,7 +95,7 @@ const Footer = () => {
       const is_at_bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 150;
       if (is_at_bottom) {
         const delta_y = last_y - e.touches.clientY; 
-        added_rotation.set(added_rotation.get() + delta_y * 0.1); 
+        added_rotation.set(added_rotation.get() - delta_y * 0.1); 
         last_y = e.touches.clientY; 
       }
     };
@@ -119,7 +127,7 @@ const Footer = () => {
       <div className="absolute z-10 left-1/2 -translate-x-1/2 w-[2600px] h-[2600px] pointer-events-none opacity-90 top-[110px] lg:top-[130px]">
         <motion.div style={{ rotate: smooth_rotation }} className="w-full h-full relative">
           <motion.div
-            animate={{ rotate: 360 }}
+            animate={{ rotate: -360 }}
             transition={{ duration: 1000, repeat: Infinity, ease: "linear" }}
             className="w-full h-full relative"
           >
@@ -193,7 +201,7 @@ const Footer = () => {
             </span>
           </p>
           <p className="text-[10px] lg:text-xs text-white/40 font-extralight tracking-wider mt-1.5">
-            © 2026 Algorithm 10. All rights reserved. Panvel, Maharashtra.
+            © 2026 Algorithm 10. All rights reserved. Navi Mumabi.
           </p>
         </div>
       </div>
