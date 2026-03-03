@@ -45,7 +45,7 @@ export default function Page() {
             {/* 2. MAIN CONTENT LAYER */}
             {/* -mt-[100dvh] pulls this layer up so it slides seamlessly over the sticky Hero */}
             <div className="relative z-30 -mt-[100dvh] bg-neutral-950 shadow-[0_20px_50px_rgba(0,0,0,1)]">
-              
+              <SharedBackground />
               {/* Changed bg-neutral-950 to bg-transparent to let the particles show through */}
               <div className="relative z-10 bg-transparent">
                 <section id="about"><About /></section>
