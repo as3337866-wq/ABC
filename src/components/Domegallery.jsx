@@ -575,17 +575,24 @@ export default function DomeGallery({
           return;
 
         if (pointerTypeRef.current === "touch") {
-          if (first && Math.abs(my) > Math.abs(mx)) {
-            draggingRef.current = false;
-            return;
-          }
-          if (draggingRef.current) {
-            event.preventDefault();
-            lockScroll();
-          } else {
-            return;
-          }
-        }
+  // If the initial movement is mostly vertical, let the user scroll the page
+  if (first && Math.abs(my) > Math.abs(mx)) {
+    draggingRef.current = false;
+    return;
+  }
+  
+  if (draggingRef.current) {
+    // ONLY lock the scroll and prevent default if they dragged horizontally by more than 10 pixels
+    if (Math.abs(mx) > 10) {
+      if (event.cancelable) {
+        event.preventDefault();
+      }
+      lockScroll();
+    }
+  } else {
+    return;
+  }
+}
 
         const dxTotal = event.clientX - startPosRef.current.x;
         const dyTotal = event.clientY - startPosRef.current.y;

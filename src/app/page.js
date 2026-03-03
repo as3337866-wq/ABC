@@ -19,12 +19,6 @@ export default function Page() {
 
   return (
     <>
-      <style jsx global>{`
-        html {
-          scroll-snap-type: y proximity;
-        }
-      `}</style>
-
       {!showHome && (
         <Loader
           onComplete={(name) => {
@@ -44,14 +38,13 @@ export default function Page() {
             
             {/* 1. HERO LAYER */}
             {/* The Hero component natively handles its own 100dvh sticky behavior */}
-            <section id="home" className="relative z-10 snap-start bg-neutral-950">
-              <Hero />
+<section id="home" className="relative z-10 bg-neutral-950">              
+  <Hero />
             </section>
 
             {/* 2. MAIN CONTENT LAYER */}
             {/* -mt-[100dvh] pulls this layer up so it slides seamlessly over the sticky Hero */}
-            <div className="relative z-30 -mt-[100dvh] bg-neutral-950 snap-start shadow-[0_20px_50px_rgba(0,0,0,1)]">
-              <SharedBackground />
+            <div className="relative z-30 -mt-[100dvh] bg-neutral-950 shadow-[0_20px_50px_rgba(0,0,0,1)]">
               
               {/* Changed bg-neutral-950 to bg-transparent to let the particles show through */}
               <div className="relative z-10 bg-transparent">
