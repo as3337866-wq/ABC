@@ -32,39 +32,40 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="relative overflow-hidden bg-transparent pt-24 pb-16">
+    <section id="about" className="relative w-full overflow-hidden bg-transparent pt-16 pb-12 lg:pt-24 lg:pb-16">
       {/* Background gradient glow */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="bg-gradient-radial absolute top-1/2 left-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 from-orange-600/20 via-orange-900/10 to-transparent blur-3xl"></div>
-        <div className="absolute top-1/3 right-1/4 h-[400px] w-[400px] rounded-full bg-orange-500/15 blur-[120px]"></div>
+        <div className="bg-gradient-radial absolute top-1/2 left-1/2 h-[600px] w-[600px] lg:h-[800px] lg:w-[800px] -translate-x-1/2 -translate-y-1/2 from-orange-600/20 via-orange-900/10 to-transparent blur-3xl"></div>
+        <div className="absolute top-1/3 right-1/4 h-[300px] w-[300px] lg:h-[400px] lg:w-[400px] rounded-full bg-orange-500/15 blur-[120px]"></div>
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 z-10">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 z-10">
+        {/* CHANGED: Modified desktop grid to give text 40% space and images 60% space so they can natively grow */}
+        <div className="flex flex-col lg:grid lg:grid-cols-[45%_55%] xl:grid-cols-[40%_60%] items-center gap-10 lg:gap-8 w-full">
           
           {/* Left Section - Text Content */}
-          <div className="z-10 flex h-full flex-col items-center justify-center pb-10 lg:pb-24 text-center lg:items-start lg:text-left">
+          <div className="z-10 flex w-full flex-col items-center justify-center text-center lg:items-start lg:text-left">
             
             <div className="relative w-full">
-              {/* Sleek left border glow */}
+              {/* Sleek left border glow (Desktop only) */}
               <div className="absolute -left-6 top-0 hidden h-full w-1 rounded-full bg-gradient-to-b from-orange-500 via-amber-500 to-transparent opacity-80 lg:block blur-[1px]"></div>
 
               {/* Status Badge */}
               <div 
-                className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 opacity-0 backdrop-blur-sm shadow-[0_0_15px_rgba(249,115,22,0.15)]"
+                className="mb-4 sm:mb-6 inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1.5 opacity-0 backdrop-blur-sm shadow-[0_0_15px_rgba(249,115,22,0.15)]"
                 style={{ animation: "fadeIn 0.8s ease-out 0.1s forwards" }}
               >
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500"></span>
                 </span>
-                <span className="font-cyber text-xs font-bold tracking-widest text-orange-400 uppercase">
+                <span className="font-cyber text-[10px] sm:text-xs font-bold tracking-widest text-orange-400 uppercase">
                   Algorithm X Edition
                 </span>
               </div>
 
               {/* Main Heading */}
-              <h2 className="mb-6 text-3xl sm:text-4xl lg:text-5xl leading-[1.15] font-bold tracking-tight text-white drop-shadow-sm">
+              <h2 className="mb-4 sm:mb-6 text-3xl sm:text-4xl lg:text-5xl leading-[1.2] lg:leading-[1.15] font-bold tracking-tight text-white drop-shadow-sm w-full">
                 Innovating for a
                 <br />
                 <span className="bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">
@@ -73,14 +74,14 @@ export default function About() {
               </h2>
 
               {/* Description */}
-              <div className="font-inter flex flex-col gap-5 text-sm sm:text-base leading-relaxed text-gray-300/90 max-w-xl mx-auto lg:mx-0">
-                <p className="opacity-0" style={{ animation: "fadeIn 0.8s ease-out 0.3s forwards" }}>
+              <div className="font-inter flex flex-col w-full gap-4 text-[13px] sm:text-base leading-relaxed text-gray-300/90 max-w-md sm:max-w-xl mx-auto lg:mx-0">
+                <p className="opacity-0 break-words w-full" style={{ animation: "fadeIn 0.8s ease-out 0.3s forwards" }}>
                   <strong className="font-semibold text-white">Algorithm X</strong> is our signature 32-hour hackathon designed to push the boundaries of technology. 
                   This edition, we are directly targeting the UN's 17 Sustainable Development Goals, 
                   challenging participants to code for humanity.
                 </p>
 
-                <p className="opacity-0" style={{ animation: "fadeIn 0.8s ease-out 0.5s forwards" }}>
+                <p className="opacity-0 break-words w-full" style={{ animation: "fadeIn 0.8s ease-out 0.5s forwards" }}>
                   Build impactful solutions—from climate action to clean energy—and join a collaborative 
                   environment where your code drives measurable, global change.
                 </p>
@@ -92,18 +93,18 @@ export default function About() {
                 style={{ animation: "fadeIn 0.8s ease-out 0.7s forwards" }}
               >
                 <button
-                  className="font-cyber group relative w-full sm:w-auto h-[48px] overflow-hidden rounded-lg border border-orange-500 bg-gradient-to-r from-orange-600 to-orange-700 px-6 text-sm font-semibold text-white shadow-[0_0_20px_rgba(255,140,66,0.3)] transition-all hover:scale-105 active:scale-95 flex items-center justify-center"
+                  className="font-cyber group relative w-full max-w-[320px] sm:max-w-none sm:w-auto h-[48px] overflow-hidden rounded-lg border border-orange-500 bg-gradient-to-r from-orange-600 to-orange-700 px-6 text-[12px] sm:text-sm font-semibold text-white shadow-[0_0_20px_rgba(255,140,66,0.3)] transition-all hover:scale-105 active:scale-95 flex items-center justify-center"
                   onClick={() => (window.location.href = "https://unstop.com")}
                 >
                   <div className="absolute inset-0 w-full translate-x-[-100%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-[100%]" />
-                  <span className="relative z-10 whitespace-nowrap tracking-wider">LEARN MORE & REGISTER</span>
+                  <span className="relative z-10 tracking-wider">LEARN MORE & REGISTER</span>
                 </button>
 
-                <div className="group relative w-full sm:w-[320px] h-[48px] flex items-center overflow-hidden rounded-lg border border-orange-500/30 bg-neutral-900/80 shadow-[0_0_15px_rgba(249,115,22,0.1)] backdrop-blur-md">
+                <div className="group relative w-full max-w-[320px] h-[48px] flex items-center overflow-hidden rounded-lg border border-orange-500/30 bg-neutral-900/80 shadow-[0_0_15px_rgba(249,115,22,0.1)] backdrop-blur-md">
                   <div className="absolute inset-0 w-[200%] translate-x-[-100%] bg-gradient-to-r from-transparent via-orange-500/10 to-transparent transition-transform duration-1000 group-hover:translate-x-[100%]" />
                   
-                  <div className="relative flex h-full shrink-0 items-center justify-center border-r border-orange-500/30 bg-orange-950/40 px-3 sm:px-4">
-                    <span className="font-terminal text-xs sm:text-sm tracking-widest text-orange-500 uppercase">
+                  <div className="relative flex h-full shrink-0 items-center justify-center border-r border-orange-500/30 bg-orange-950/40 px-3">
+                    <span className="font-terminal text-[10px] sm:text-xs tracking-widest text-orange-500 uppercase">
                       SDG GOAL
                     </span>
                   </div>
@@ -116,7 +117,7 @@ export default function About() {
                         animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                         exit={{ y: -20, opacity: 0, filter: "blur(2px)" }}
                         transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="font-inter absolute w-full px-2 text-center leading-tight bg-gradient-to-r from-orange-200 to-amber-400 bg-clip-text text-sm font-bold tracking-wide text-transparent uppercase drop-shadow-[0_0_8px_rgba(251,146,60,0.3)]"
+                        className="font-inter absolute w-[95%] text-center leading-tight bg-gradient-to-r from-orange-200 to-amber-400 bg-clip-text text-[11px] sm:text-sm font-bold tracking-wide text-transparent uppercase drop-shadow-[0_0_8px_rgba(251,146,60,0.3)] truncate"
                       >
                         {sdgGoals[currentSdg]}
                       </motion.div>
@@ -129,12 +130,13 @@ export default function About() {
           </div>
 
           {/* Right Section - Prize Images */}
-          <div className="relative flex min-h-[350px] sm:min-h-[450px] lg:min-h-[600px] items-center justify-center">
-            <div className="relative flex w-full max-w-2xl items-end justify-center px-4">
+          <div className="relative flex w-full items-center justify-center mt-4 lg:mt-0">
+            {/* CHANGED: Added lg:max-w-full to remove grid constraints and lg:scale-[1.15] xl:scale-[1.3] to visually blow up the images only on desktop */}
+            <div className="relative flex w-full max-w-[450px] lg:max-w-full items-end justify-center px-4 lg:scale-[1.0] xl:scale-[1.05] lg:translate-x-4 xl:translate-x-8">
               
               {/* 2nd Prize */}
               <motion.div 
-                className="relative z-10 -mr-[12vw] lg:-mr-[8vw] mb-6 cursor-pointer"
+                className="relative z-10 w-[35%] -mr-[12%] mb-[4%] cursor-pointer"
                 custom={0.4}
                 initial="hidden"
                 whileInView="visible"
@@ -147,13 +149,13 @@ export default function About() {
                   alt="2nd Prize" 
                   width={400} 
                   height={500} 
-                  className="h-auto w-[35vw] lg:w-[28vw] max-w-[260px] min-w-[140px] drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+                  className="w-full h-auto drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
                 />
               </motion.div>
 
               {/* 1st Prize */}
               <motion.div 
-                className="relative z-30 cursor-pointer"
+                className="relative z-30 w-[45%] cursor-pointer"
                 custom={0.2}
                 initial="hidden"
                 whileInView="visible"
@@ -166,14 +168,13 @@ export default function About() {
                   alt="1st Prize" 
                   width={500} 
                   height={600} 
-                  className="h-auto w-[45vw] lg:w-[35vw] max-w-[340px] min-w-[180px] drop-shadow-[0_20px_50px_rgba(255,140,66,0.4)]"
+                  className="w-full h-auto drop-shadow-[0_20px_50px_rgba(255,140,66,0.4)]"
                 />
               </motion.div>
 
               {/* 3rd Prize */}
-              {/* CHANGED: Adjusted margin and matched whileHover to the 2nd prize slab */}
               <motion.div 
-                className="relative z-10 -ml-[12vw] lg:-ml-[6vw] mb-4 cursor-pointer"
+                className="relative z-10 w-[32%] -ml-[12%] mb-[2%] cursor-pointer rotate-[8deg]"
                 style={{ transformOrigin: "bottom left" }}
                 custom={0.6}
                 initial="hidden"
@@ -182,20 +183,18 @@ export default function About() {
                 viewport={{ once: false, amount: 0.2 }}
                 variants={imageVariants}
               >
-                {/* Fixed the static rotation to 8 degrees */}
-                <div className="rotate-[8deg]">
-                  <Image 
-                    src="/images/3rd.png" 
-                    alt="3rd Prize" 
-                    width={380} 
-                    height={480} 
-                    className="h-auto w-[32vw] lg:w-[25vw] max-w-[240px] min-w-[120px] drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
-                  />
-                </div>
+                <Image 
+                  src="/images/3rd.png" 
+                  alt="3rd Prize" 
+                  width={380} 
+                  height={480} 
+                  className="w-full h-auto drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+                />
               </motion.div>
 
             </div>
           </div>
+
         </div>
       </div>
 
