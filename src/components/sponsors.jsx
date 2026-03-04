@@ -55,8 +55,8 @@ const SponsorCard = ({ name, logo, delay }) => {
         }}
       >
         {/* --- Moving Trail Border --- */}
-        <div className="absolute -inset-[2px] overflow-hidden rounded-2xl z-0">
-          <div className="absolute top-1/2 left-1/2 aspect-square w-[200%] -translate-x-1/2 -translate-y-1/2 animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_270deg,#ff8c42_360deg)] opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="absolute -inset-[2px] z-0 overflow-hidden rounded-2xl">
+          <div className="absolute left-1/2 top-1/2 aspect-square w-[200%] -translate-x-1/2 -translate-y-1/2 animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_270deg,#ff8c42_360deg)] opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
           <div className="absolute inset-[2px] rounded-[14px] bg-[#0a0a0a]" />
         </div>
 
@@ -71,7 +71,7 @@ const SponsorCard = ({ name, logo, delay }) => {
 
         {/* Breathing Glow (Simulates power/life when idle) */}
         <div
-          className={`pointer-events-none absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/10 blur-[50px] transition-opacity duration-700 ${isHovered ? "opacity-0" : "animate-pulse"}`}
+          className={`pointer-events-none absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/10 blur-[50px] transition-opacity duration-700 ${isHovered ? "opacity-0" : "animate-pulse"}`}
         />
 
         {/* Interactive Spotlight (On Hover) */}
@@ -136,18 +136,18 @@ const SponsorCard = ({ name, logo, delay }) => {
 
 export default function Sponsors() {
   const sponsors = [
+    // {
+    //   name: "Google",
+    //   logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
+    // },
     {
-      name: "Google",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
+      name: "Red Bull",
+      logo: "/images/redbull.png",
     },
-    {
-      name: "Netflix",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
-    },
-    {
-      name: "Spotify",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg",
-    },
+    // {
+    //   name: "Spotify",
+    //   logo: "https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg",
+    // },
   ];
 
   return (
@@ -155,35 +155,35 @@ export default function Sponsors() {
       <div className="relative z-10 mx-auto max-w-7xl">
         
         {/* Gallery-Style Header */}
-        <div className="mb-20 text-center transform transition-all duration-1000 hover:scale-105">
+        <div className="mb-20 transform text-center transition-all duration-1000 hover:scale-105">
           {/* Decorative Line Above */}
-          <div className="flex items-center justify-center mb-6">
+          <div className="mb-6 flex items-center justify-center">
             <div className="h-px w-12 bg-gradient-to-r from-transparent via-orange-500 to-transparent" />
-            <div className="mx-4 h-2 w-2 rounded-full bg-orange-500 animate-pulse" />
+            <div className="mx-4 h-2 w-2 animate-pulse rounded-full bg-orange-500" />
             <div className="h-px w-12 bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
           </div>
 
           {/* Main Heading with Gradient and Glow */}
-          <h2 className="mb-4 text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 bg-clip-text text-transparent relative inline-block">
+          <h2 className="relative mb-4 inline-block bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 bg-clip-text text-4xl font-bold tracking-tight text-transparent md:text-5xl lg:text-6xl">
             Our Partners
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 blur-2xl opacity-30 -z-10" />
+            <div className="absolute inset-0 -z-10 bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 opacity-30 blur-2xl" />
           </h2>
           
           {/* Subtitle */}
-          <p className="mx-auto max-w-2xl text-lg text-gray-400 leading-relaxed mt-2">
+          <p className="mx-auto mt-2 max-w-2xl text-lg leading-relaxed text-gray-400">
             Fueling innovation through collaboration and technology.
           </p>
 
           {/* Decorative Line Below */}
-          <div className="flex items-center justify-center mt-6">
+          <div className="mt-6 flex items-center justify-center">
             <div className="h-px w-24 bg-gradient-to-r from-orange-500/50 to-transparent" />
             <div className="mx-3 h-1 w-1 rounded-full bg-amber-500" />
             <div className="h-px w-24 bg-gradient-to-l from-amber-500/50 to-transparent" />
           </div>
         </div>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 justify-items-center gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+        {/* --- UPDATED: Flexbox Container for dynamic centering --- */}
+        <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-12">
           {sponsors.map((sponsor, index) => (
             <SponsorCard key={index} {...sponsor} delay={0.1 * index} />
           ))}
@@ -198,4 +198,4 @@ export default function Sponsors() {
       `}</style>
     </section>
   );
-} 
+}

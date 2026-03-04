@@ -11,16 +11,18 @@ const base_team_members = [
   { image: "/team/MM-member1.webp", role: "Media & Marketing", name: "Arman"   },
   { image: "/team/MM-member2.webp", role: "Media & Marketing", name: "Aman"    },
   { image: "/team/MM-member3.webp", role: "Media & Marketing", name: "Alamin"  },
-  { image: "/team/MM-member4.webp", role: "Media & Marketing", name: "Zain"    },
-  { image: "/team/MM-member5.webp", role: "Media & Marketing", name: "Javeriya"   },
+  { image: "/team/MM-member4.webp", role: "Media & Marketing", name: "Javeriya"    },
+  { image: "/team/MM-member5.webp", role: "Media & Marketing", name: "Altaf"   },
+  { image: "/team/MM-member6.webp", role: "Media & Marketing", name: "Zain"   },
   { image: "/team/S-member1.webp",  role: "Sponsorship",       name: "Umar"    },
   { image: "/team/T-member2.webp",  role: "Technical",         name: "Asim"    },
   { image: "/team/T-member3.webp",  role: "Technical",         name: "Mueez"   },
   { image: "/team/T-member4.webp",  role: "Technical",         name: "Moin"    },
-  { image: "/team/T-member5.webp",  role: "Technical",         name: "Iffah"   },
-  { image: "/team/T-member6.webp",  role: "Technical",         name: "Ayesha"  },
-  { image: "/team/T-member7.webp",  role: "Technical",         name: "Owais"   },
-  { image: "/team/T-member8.webp",  role: "Technical",         name: "Huzaifa" },
+  { image: "/team/T-member5.webp",  role: "Technical",         name: "A.Rehman"    },
+  { image: "/team/T-member6.webp",  role: "Technical",         name: "Iffah"   },
+  { image: "/team/T-member7.webp",  role: "Technical",         name: "Ayesha"  },
+  { image: "/team/T-member8.webp",  role: "Technical",         name: "Huzaifa"   },
+  { image: "/team/T-member9.webp",  role: "Technical",         name: "Owais" },
   { image: "/team/DO-member1.webp", role: "Documentation",     name: "Irfan"   },
   { image: "/team/DO-member2.webp", role: "Documentation",     name: "Ayesha"  },
   { image: "/team/DO-member3.webp", role: "Documentation",     name: "Shama"  },
@@ -30,7 +32,7 @@ const base_team_members = [
   { image: "/team/D-member4.webp",  role: "Design",            name: "Humaira" },
   { image: "/team/D-member5.webp",  role: "Design",            name: "Jishan"  },
   { image: "/team/D-member6.webp",  role: "Design",            name: "Affan"   },
-  { image: "/team/D-member6.webp",  role: "Design",            name: "Arshiya"   },
+  { image: "/team/D-member7.webp",  role: "Design",            name: "Arshiya"   },
   { image: "/team/DE-member1.webp", role: "Decoration",        name: "Reefa"   },
   { image: "/team/DE-member2.webp", role: "Decoration",        name: "Yahya"   },
   { image: "/team/DE-member3.webp", role: "Decoration",        name: "Afrah"   },
@@ -86,20 +88,6 @@ const useConfig = () => {
         return;
       }
 
-      // ── DESKTOP ──────────────────────────────────────────────────────────
-      // Strategy: place a giant circle whose centre is far below the screen.
-      // Only the very top of the circle (a flat horizon of cards) is visible.
-      //
-      // We need radius R such that adjacent cards (13.3° apart) are spaced
-      // wider than the viewport so only 1 card sits in the centre at a time.
-      // chord = 2R·sin(6.65°) = R·0.231  must be > viewport width W
-      // → R > W / 0.231  ≈  4.3 × W
-      // Use R = 5 × W for a comfortable margin.
-      //
-      // arcTop = how far from footer top the circle square starts.
-      // We want the top card to sit at ~100px from footer top.
-      // Cards sit at the very top of the square → arcTop = 100px
-      // Circle centre = arcTop + R = 100 + 5W  (deep below screen) ✓
       const R       = Math.round(w * 1.8);
       const arcSize = R * 1;
       const arcTop  = 150;                                       // cards appear at 100px from top

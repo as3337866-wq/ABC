@@ -33,3 +33,7 @@ body {
   overflow-x: hidden; /* Add this! */
   width: 100%; /* Add this! */
 }
+
+html {
+  scroll-behavior: smooth;
+}

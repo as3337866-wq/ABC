@@ -8,6 +8,15 @@ const BackgroundAnimation = ({ progress, totalSections }) => {
   const [pathLength, setPathLength] = useState(0);
   const [pathD, setPathD] = useState("");
   const [logoTransform, setLogoTransform] = useState("translate(0, 0)");
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile to disable heavy SVG filters
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // SVG Constants
   const sectionHeight = 100;
@@ -80,12 +89,14 @@ const BackgroundAnimation = ({ progress, totalSections }) => {
         height="100%"
         viewBox={`0 0 100 ${viewBoxHeight}`}
         preserveAspectRatio="none"
+        className="will-change-transform"
       >
         <defs>
           <linearGradient id="line-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#F36A1D" stopOpacity="0.8" />
             <stop offset="100%" stopColor="#F5A623" stopOpacity="1" />
           </linearGradient>
+          {/* Filters are kept in defs but only applied on desktop to save mobile performance */}
           <filter id="line-glow" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="0.8" result="coloredBlur" />
           </filter>
@@ -105,14 +116,14 @@ const BackgroundAnimation = ({ progress, totalSections }) => {
             fill="none"
             stroke="url(#line-gradient)"
             strokeWidth="0.2"
-            filter="url(#line-glow)"
+            filter={isMobile ? undefined : "url(#line-glow)"}
             style={{ strokeDasharray: pathLength, strokeDashoffset: strokeDashoffset }}
           />
         </g>
 
         {pathLength > 0 && (
           <g transform={logoTransform}>
-            <circle cx="0" cy="0" r="1.5" fill="#F5A623" filter="url(#node-glow)" />
+            <circle cx="0" cy="0" r="1.5" fill="#F5A623" filter={isMobile ? undefined : "url(#node-glow)"} />
             <circle cx="0" cy="0" r="0.5" fill="#FFF" />
           </g>
         )}
@@ -125,7 +136,6 @@ const BackgroundAnimation = ({ progress, totalSections }) => {
 const SectionContent = ({ section, isCurrent, index }) => {
   const isLeft = index % 2 === 0;
 
-  // On mobile (default), we center everything. On MD up, we apply original alignment.
   const justifyClass = isLeft
     ? "justify-center md:justify-start"
     : "justify-center md:justify-end";
@@ -134,7 +144,6 @@ const SectionContent = ({ section, isCurrent, index }) => {
     ? "md:ml-[15%] lg:ml-[20%] text-center md:text-left items-center md:items-start"
     : "md:mr-[15%] lg:mr-[20%] text-center md:text-right items-center md:items-end";
 
-  // Borders removed on mobile for cleaner centered look, kept on desktop
   const borderClass = isLeft
     ? "md:border-l-4 border-[#F36A1D] md:pl-6"
     : "md:border-r-4 border-[#F36A1D] md:pr-6";
@@ -144,9 +153,9 @@ const SectionContent = ({ section, isCurrent, index }) => {
     : "bg-gradient-to-b md:bg-gradient-to-l from-[#F36A1D]/10 to-transparent";
 
   return (
-    <div className={`absolute inset-0 flex items-center px-6 ${justifyClass}`}>
+    <div className={`absolute inset-0 flex items-center px-6 ${justifyClass} transform-gpu`}>
       <div
-        className={`relative flex max-w-lg flex-col py-6 transition-all duration-700 ease-out ${containerClasses} ${
+        className={`relative flex max-w-lg flex-col py-6 transition-all duration-700 ease-out will-change-transform ${containerClasses} ${
           isCurrent ? "translate-y-0 opacity-100 scale-105" : "translate-y-8 opacity-20 scale-95"
         }`}
       >
@@ -163,7 +172,7 @@ const SectionContent = ({ section, isCurrent, index }) => {
             </span>
             <span
               className={`block text-5xl text-[#F36A1D] transition-all duration-500 md:text-7xl lg:text-8xl ${
-                isCurrent ? "blur-0" : "blur-sm"
+                isCurrent ? "opacity-100 scale-100 md:blur-0" : "opacity-60 scale-95 md:blur-sm"
               }`}
             >
               {section.number.line2}
@@ -207,6 +216,8 @@ const Timeline = () => {
   }, [sections.length]);
 
   useEffect(() => {
+    let ticking = false; // Add throttle flag
+
     const handleScroll = () => {
       const container = scrollContainerRef.current;
       if (!container) return;
@@ -287,21 +298,32 @@ const Timeline = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Optimization: Wrap scroll logic in requestAnimationFrame to prevent layout thrashing
+    const scrollListener = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", scrollListener, { passive: true });
+    scrollListener(); // Initialize once
+    return () => window.removeEventListener("scroll", scrollListener);
   }, [currentIndex, sections.length]);
 
   return (
-    <div ref={scrollContainerRef} className="relative w-full bg-transparent">
+    <div ref={scrollContainerRef} className="relative w-full bg-transparent overflow-hidden">
       <style jsx global>{`
         .font-orbitron { font-family: "Orbitron", sans-serif; }
       `}</style>
 
-      <div style={{ opacity: componentOpacity }}>
+      <div style={{ opacity: componentOpacity }} className="transform-gpu">
         {/* Header Section - Reduced padding on mobile */}
         <div
-          className="relative z-10 flex flex-col items-center justify-center pt-20 pb-8 text-center md:pt-32 md:pb-12"
+          className="relative z-10 flex flex-col items-center justify-center pt-20 pb-8 text-center md:pt-32 md:pb-12 will-change-opacity"
           style={{ opacity: headerOpacity }}
         >
           <h2 className="font-orbitron text-4xl font-bold tracking-widest text-[#F5A623] uppercase drop-shadow-[0_0_15px_rgba(243,106,29,0.4)] md:text-6xl">
@@ -320,7 +342,6 @@ const Timeline = () => {
               <div
                 key={index}
                 ref={(el) => { sectionRefs.current[index] = el; }}
-                /* CHANGED: min-h-[35vh] for mobile, min-h-[60vh] for desktop */
                 className="relative flex min-h-[35vh] md:min-h-[60vh] w-full flex-shrink-0 items-center justify-center"
               >
                 <SectionContent

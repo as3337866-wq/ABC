@@ -32,7 +32,9 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="relative w-full overflow-hidden bg-transparent pt-16 pb-12 lg:pt-24 lg:pb-16">
+    /* Reduced lg:pt-24 to lg:pt-12 to uplift the entire section on desktop */
+    <section id="about" className="relative w-full overflow-hidden bg-transparent min-h-[100dvh] flex flex-col justify-center lg:min-h-0 lg:block pt-20 pb-8 max-[380px]:pt-12 max-[380px]:pb-4 max-h-[740px]:pt-10 max-h-[740px]:pb-2 md:py-16 lg:pt-20 lg:pb-16">
+      
       {/* Background gradient glow */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="bg-gradient-radial absolute top-1/2 left-1/2 h-[600px] w-[600px] lg:h-[800px] lg:w-[800px] -translate-x-1/2 -translate-y-1/2 from-orange-600/20 via-orange-900/10 to-transparent blur-3xl"></div>
@@ -40,19 +42,17 @@ export default function About() {
       </div>
 
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 z-10">
-        {/* CHANGED: Modified desktop grid to give text 40% space and images 60% space so they can natively grow */}
-        <div className="flex flex-col lg:grid lg:grid-cols-[45%_55%] xl:grid-cols-[40%_60%] items-center gap-10 lg:gap-8 w-full">
+        <div className="flex flex-col lg:grid lg:grid-cols-[45%_55%] xl:grid-cols-[40%_60%] items-center gap-4 max-[380px]:gap-2 max-h-[740px]:gap-2 md:gap-10 lg:gap-8 w-full">
           
           {/* Left Section - Text Content */}
           <div className="z-10 flex w-full flex-col items-center justify-center text-center lg:items-start lg:text-left">
-            
             <div className="relative w-full">
               {/* Sleek left border glow (Desktop only) */}
               <div className="absolute -left-6 top-0 hidden h-full w-1 rounded-full bg-gradient-to-b from-orange-500 via-amber-500 to-transparent opacity-80 lg:block blur-[1px]"></div>
 
-              {/* Status Badge */}
+              {/* Status Badge - Reduced desktop bottom margin (lg:mb-3) */}
               <div 
-                className="mb-4 sm:mb-6 inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1.5 opacity-0 backdrop-blur-sm shadow-[0_0_15px_rgba(249,115,22,0.15)]"
+                className="mb-3 max-[380px]:mb-2 max-h-[740px]:mb-1 md:mb-5 lg:mb-3 inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1.5 opacity-0 backdrop-blur-sm shadow-[0_0_15px_rgba(249,115,22,0.15)]"
                 style={{ animation: "fadeIn 0.8s ease-out 0.1s forwards" }}
               >
                 <span className="relative flex h-2 w-2">
@@ -64,8 +64,8 @@ export default function About() {
                 </span>
               </div>
 
-              {/* Main Heading */}
-              <h2 className="mb-4 sm:mb-6 text-3xl sm:text-4xl lg:text-5xl leading-[1.2] lg:leading-[1.15] font-bold tracking-tight text-white drop-shadow-sm w-full">
+              {/* Main Heading - Reduced desktop bottom margin (lg:mb-3) */}
+              <h2 className="mb-3 max-[380px]:mb-2 max-h-[740px]:mb-1 md:mb-5 lg:mb-3 text-3xl max-[380px]:text-[26px] max-h-[740px]:text-[24px] sm:text-4xl lg:text-5xl leading-[1.2] lg:leading-[1.15] font-bold tracking-tight text-white drop-shadow-sm w-full">
                 Innovating for a
                 <br />
                 <span className="bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">
@@ -73,8 +73,8 @@ export default function About() {
                 </span>
               </h2>
 
-              {/* Description */}
-              <div className="font-inter flex flex-col w-full gap-4 text-[13px] sm:text-base leading-relaxed text-gray-300/90 max-w-md sm:max-w-xl mx-auto lg:mx-0">
+              {/* Description - Tightened desktop gaps (lg:gap-2) */}
+              <div className="font-inter flex flex-col w-full gap-3 max-[380px]:gap-2 max-h-[740px]:gap-1.5 md:gap-4 lg:gap-2 text-[13px] max-[380px]:text-[12px] max-h-[740px]:text-[11px] sm:text-base leading-relaxed text-gray-300/90 max-w-md sm:max-w-xl mx-auto lg:mx-0">
                 <p className="opacity-0 break-words w-full" style={{ animation: "fadeIn 0.8s ease-out 0.3s forwards" }}>
                   <strong className="font-semibold text-white">Algorithm X</strong> is our signature 32-hour hackathon designed to push the boundaries of technology. 
                   This edition, we are directly targeting the UN's 17 Sustainable Development Goals, 
@@ -87,56 +87,63 @@ export default function About() {
                 </p>
               </div>
 
-              {/* Call to Action & SDG Tracker */}
               <div 
-                className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full opacity-0"
-                style={{ animation: "fadeIn 0.8s ease-out 0.7s forwards" }}
-              >
-                <button
-                  className="font-cyber group relative w-full max-w-[320px] sm:max-w-none sm:w-auto h-[48px] overflow-hidden rounded-lg border border-orange-500 bg-gradient-to-r from-orange-600 to-orange-700 px-6 text-[12px] sm:text-sm font-semibold text-white shadow-[0_0_20px_rgba(255,140,66,0.3)] transition-all hover:scale-105 active:scale-95 flex items-center justify-center"
-                  onClick={() => (window.location.href = "https://unstop.com")}
-                >
-                  <div className="absolute inset-0 w-full translate-x-[-100%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-[100%]" />
-                  <span className="relative z-10 tracking-wider">LEARN MORE & REGISTER</span>
-                </button>
+  className="mt-6 max-h-[740px]:mt-2 md:mt-6 lg:mt-6 flex flex-col items-center lg:items-start gap-4 lg:gap-3 w-full opacity-0"
+  style={{ animation: "fadeIn 0.8s ease-out 0.7s forwards" }}
+>
+  {/* SDG Goal Tracker */}
+<div className="group relative w-[95%] max-w-[340px] lg:max-w-none lg:w-[380px] h-[48px] sm:h-[44px] lg:h-[48px] flex items-center overflow-hidden rounded-lg border border-orange-500/40 bg-neutral-900/90 shadow-[0_0_15px_rgba(249,115,22,0.15)] backdrop-blur-md">
+  <div className="absolute inset-0 w-[200%] translate-x-[-100%] bg-gradient-to-r from-transparent via-orange-500/10 to-transparent transition-transform duration-1000 group-hover:translate-x-[100%]" />
+  
+  {/* Shrunk mobile padding (px-2 instead of px-3) to give the goal text more horizontal space */}
+  <div className="relative flex h-full shrink-0 items-center justify-center border-r border-orange-500/40 bg-orange-500/20 px-2 lg:px-4">
+    <span className="font-cyber font-black text-[10px] lg:text-[11px] tracking-wider text-orange-300 uppercase">
+      SDG GOAL'S
+    </span>
+  </div>
 
-                <div className="group relative w-full max-w-[320px] h-[48px] flex items-center overflow-hidden rounded-lg border border-orange-500/30 bg-neutral-900/80 shadow-[0_0_15px_rgba(249,115,22,0.1)] backdrop-blur-md">
-                  <div className="absolute inset-0 w-[200%] translate-x-[-100%] bg-gradient-to-r from-transparent via-orange-500/10 to-transparent transition-transform duration-1000 group-hover:translate-x-[100%]" />
-                  
-                  <div className="relative flex h-full shrink-0 items-center justify-center border-r border-orange-500/30 bg-orange-950/40 px-3">
-                    <span className="font-terminal text-[10px] sm:text-xs tracking-widest text-orange-500 uppercase">
-                      SDG GOAL
-                    </span>
-                  </div>
+  {/* Reduced mobile horizontal padding to px-1 to maximize text area */}
+  {/* Text Container */}
+<div className="relative flex h-full flex-1 items-center justify-center px-1 sm:px-4 overflow-hidden">
+  <AnimatePresence mode="popLayout">
+    <motion.div
+      key={currentSdg}
+      initial={{ y: 20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: -20, opacity: 0 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+      className={`font-inter w-full text-center leading-tight bg-gradient-to-r from-orange-200 to-amber-400 bg-clip-text font-bold text-transparent uppercase whitespace-nowrap ${
+        sdgGoals[currentSdg].length > 21
+          ? "text-[10px] min-[400px]:text-[11px] sm:text-[12px] lg:text-[13px] tracking-tighter sm:tracking-normal" 
+          : "text-[12px] min-[400px]:text-[13px] sm:text-[14px] lg:text-[15px] tracking-tight sm:tracking-wide"
+      }`}
+    >
+      {sdgGoals[currentSdg]}
+    </motion.div>
+  </AnimatePresence>
+</div>
+</div>
 
-                  <div className="relative flex h-full flex-1 items-center justify-center px-2 overflow-hidden">
-                    <AnimatePresence mode="popLayout">
-                      <motion.div
-                        key={currentSdg}
-                        initial={{ y: 20, opacity: 0, filter: "blur(2px)" }}
-                        animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                        exit={{ y: -20, opacity: 0, filter: "blur(2px)" }}
-                        transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="font-inter absolute w-[95%] text-center leading-tight bg-gradient-to-r from-orange-200 to-amber-400 bg-clip-text text-[11px] sm:text-sm font-bold tracking-wide text-transparent uppercase drop-shadow-[0_0_8px_rgba(251,146,60,0.3)] truncate"
-                      >
-                        {sdgGoals[currentSdg]}
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                </div>
-              </div>
-              
+  {/* Action Button */}
+  {/* FIXED: Added lg:w-[380px] lg:min-w-0 lg:h-[48px] for uniform desktop size */}
+  <button
+    className="font-cyber group relative w-[95%] max-w-[340px] sm:max-w-none sm:w-auto lg:w-[380px] lg:min-w-0 h-[48px] sm:h-[46px] lg:h-[48px] overflow-hidden rounded-lg border border-orange-500 bg-gradient-to-r from-orange-600 to-orange-700 px-8 text-sm font-bold text-white shadow-[0_0_20px_rgba(255,140,66,0.3)] transition-all hover:scale-105 active:scale-95 flex items-center justify-center whitespace-nowrap"
+    onClick={() => (window.location.href = "https://unstop.com")}
+  >
+    <div className="absolute inset-0 w-full translate-x-[-100%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-[100%]" />
+    <span className="relative z-10 tracking-widest">LEARN MORE & REGISTER</span>
+  </button>
+</div>
             </div>
           </div>
 
           {/* Right Section - Prize Images */}
-          <div className="relative flex w-full items-center justify-center mt-4 lg:mt-0">
-            {/* CHANGED: Added lg:max-w-full to remove grid constraints and lg:scale-[1.15] xl:scale-[1.3] to visually blow up the images only on desktop */}
-            <div className="relative flex w-full max-w-[450px] lg:max-w-full items-end justify-center px-4 lg:scale-[1.0] xl:scale-[1.05] lg:translate-x-4 xl:translate-x-8">
+          <div className="relative flex w-full items-center justify-center mt-8 max-[380px]:mt-4 max-h-[740px]:mt-2 md:mt-12 lg:mt-0">
+            <div className="relative flex w-full max-w-[400px] max-[380px]:max-w-[320px] max-h-[740px]:max-w-[280px] sm:max-w-[450px] md:max-w-[650px] lg:max-w-full items-center lg:items-end justify-center px-4 lg:scale-[1.0] xl:scale-[1.05] lg:translate-x-4 xl:translate-x-8">
               
               {/* 2nd Prize */}
               <motion.div 
-                className="relative z-10 w-[35%] -mr-[12%] mb-[4%] cursor-pointer"
+                className="relative z-10 w-[60%] md:w-[45%] lg:w-[35%] -mr-[22%] md:-mr-[18%] lg:-mr-[12%] mt-[12%] md:mt-[6%] lg:mt-0 mb-[4%] cursor-pointer origin-bottom-right lg:origin-center -rotate-[3deg] md:-rotate-[2deg] lg:rotate-0"
                 custom={0.4}
                 initial="hidden"
                 whileInView="visible"
@@ -155,7 +162,7 @@ export default function About() {
 
               {/* 1st Prize */}
               <motion.div 
-                className="relative z-30 w-[45%] cursor-pointer"
+                className="relative z-30 w-[65%] md:w-[50%] lg:w-[45%] cursor-pointer"
                 custom={0.2}
                 initial="hidden"
                 whileInView="visible"
@@ -174,8 +181,7 @@ export default function About() {
 
               {/* 3rd Prize */}
               <motion.div 
-                className="relative z-10 w-[32%] -ml-[12%] mb-[2%] cursor-pointer rotate-[8deg]"
-                style={{ transformOrigin: "bottom left" }}
+                className="relative z-10 w-[50%] md:w-[38%] lg:w-[32%] -ml-[22%] md:-ml-[18%] lg:-ml-[12%] mt-[12%] md:mt-[6%] lg:mt-0 mb-[5%] cursor-pointer origin-bottom-left lg:origin-bottom-left rotate-[8deg] md:rotate-[6deg] lg:rotate-[7deg]"
                 custom={0.6}
                 initial="hidden"
                 whileInView="visible"
