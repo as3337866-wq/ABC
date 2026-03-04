@@ -32,7 +32,6 @@ export default function NavbarBanner() {
     setExpanded((prev) => !prev);
   };
 
-  // NEW: specifically close menu when a mobile link is tapped
   const closeMenu = (e) => {
     if (isMobile) {
       e.stopPropagation(); // Prevent the tap from instantly re-triggering handleTap
@@ -45,7 +44,6 @@ export default function NavbarBanner() {
   }, []);
 
   return (
-    // Replaced <header> to avoid double-header HTML nesting, adding transform-gpu to prevent mobile scroll glitching
     <nav className="flex w-full justify-center px-4 transform-gpu will-change-transform">
       <div
         onMouseEnter={handleMouseEnter}
@@ -82,7 +80,7 @@ export default function NavbarBanner() {
             <span className="text-xl text-white md:hidden">☰</span>
           </div>
 
-          {/* Mobile menu - NOW CLOSES ON CLICK */}
+          {/* Mobile menu */}
           {isMobile && (
             <div className="space-y-4 px-6 pb-6 text-center text-white md:hidden">
               <a href="#home" onClick={closeMenu} className="block border-b border-white/20 pb-2">Home</a>

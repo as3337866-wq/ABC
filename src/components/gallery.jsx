@@ -35,14 +35,12 @@ const Gallery = () => {
           </div>
         </div>
 
-        {/* Gallery Dome Container with Enhanced Box */}
+        {/* Gallery Dome Container */}
         <div className="relative group">
           {/* Outer Glow Effect */}
           <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 rounded-2xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity duration-500" />
           
-          {/* Main Gallery Box 
-              ADAPTED: Height adjusted to 50vh on mobile to prevent excessive scrolling
-          */}
+          {/* Main Gallery Box */}
           <div className="relative h-[50vh] md:h-[80vh] max-h-[800px] w-full overflow-hidden rounded-2xl bg-[#0a0a0a] border border-orange-500/20 shadow-2xl">
             
             {/* Inner Glow Border */}

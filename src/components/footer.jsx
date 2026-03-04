@@ -90,7 +90,7 @@ const useConfig = () => {
 
       const R       = Math.round(w * 1.8);
       const arcSize = R * 1;
-      const arcTop  = 150;                                       // cards appear at 100px from top
+      const arcTop  = 150;                                      
       const hs      = h / 1080;
       const hScale  = Math.min(1.2, Math.max(0.85, hs));
       setCfg({

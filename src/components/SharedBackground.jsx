@@ -41,7 +41,6 @@ export default function SharedBackground() {
         ))}
       </div>
       
-      {/* CRITICAL: The 'global' keyword ensures the inline styles can find this animation */}
       <style jsx global>{`
         @keyframes floatUp {
           0% { 

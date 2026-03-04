@@ -21,7 +21,6 @@ const BackgroundAnimation = ({ progress, totalSections }) => {
   // SVG Constants
   const sectionHeight = 100;
   const startY = 50;
-  // Mobile uses narrower X positions to stay behind centered text better
   const xPositions = [65, 35];
 
   const totalPathHeight = (totalSections - 1) * sectionHeight;
@@ -321,7 +320,7 @@ const Timeline = () => {
       `}</style>
 
       <div style={{ opacity: componentOpacity }} className="transform-gpu">
-        {/* Header Section - Reduced padding on mobile */}
+        {/* Header Section*/}
         <div
           className="relative z-10 flex flex-col items-center justify-center pt-20 pb-8 text-center md:pt-32 md:pb-12 will-change-opacity"
           style={{ opacity: headerOpacity }}

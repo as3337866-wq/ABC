@@ -90,7 +90,6 @@ export default function Faq() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
           
           {/* --- LEFT SIDE: STICKY CONTAINER --- */}
-          {/* Changed top-1/3 and -translate-y-1/3 to 1/2 so it sits perfectly in the middle */}
           <div className="lg:sticky lg:top-1/2 lg:-translate-y-1/2 lg:self-start z-10">
             <motion.div 
               style={{ opacity: left_opacity, filter: left_filter }}

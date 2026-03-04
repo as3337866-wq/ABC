@@ -559,14 +559,12 @@ export default function DomeGallery({
           return;
 
         if (pointerTypeRef.current === "touch") {
-  // If the initial movement is mostly vertical, let the user scroll the page
   if (first && Math.abs(my) > Math.abs(mx)) {
     draggingRef.current = false;
     return;
   }
   
   if (draggingRef.current) {
-    // ONLY lock the scroll and prevent default if they dragged horizontally by more than 10 pixels
     if (Math.abs(mx) > 10) {
       if (event.cancelable) {
         event.preventDefault();
@@ -973,11 +971,6 @@ export default function DomeGallery({
               backgroundImage: `radial-gradient(circle, transparent 65%, var(--overlay-blur-color, ${overlayBlurColor}) 100%)`,
             }}
           />
-
-          {/* FIX: Removed backdropFilter: "blur(3px)" here! 
-            Using backdrop-filter inside a 3D perspective context destroys the Z-axis 
-            and forces the browser to flatten everything into a 2D layer. 
-          */}
           <div
             className="pointer-events-none absolute inset-0 z-[3] m-auto"
             style={{
@@ -991,9 +984,6 @@ export default function DomeGallery({
             className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center"
             style={{ padding: "var(--viewer-pad)" }}
           >
-            {/* FIX: Changed scrim background from a blur filter to a solid dark overlay 
-              to prevent 3D clipping bugs when clicking to enlarge an image. 
-            */}
             <div
               ref={scrimRef}
               className="scrim pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-500"

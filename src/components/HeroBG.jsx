@@ -12,7 +12,6 @@ export default function HeroBG() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    // Set to 150ms for a slow, cinematic feel as requested
     const timer = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 150);

@@ -32,7 +32,6 @@ export default function About() {
   };
 
   return (
-    /* Reduced lg:pt-24 to lg:pt-12 to uplift the entire section on desktop */
     <section id="about" className="relative w-full overflow-hidden bg-transparent min-h-[100dvh] flex flex-col justify-center lg:min-h-0 lg:block pt-20 pb-8 max-[380px]:pt-12 max-[380px]:pb-4 max-h-[740px]:pt-10 max-h-[740px]:pb-2 md:py-16 lg:pt-20 lg:pb-16">
       
       {/* Background gradient glow */}
@@ -50,7 +49,7 @@ export default function About() {
               {/* Sleek left border glow (Desktop only) */}
               <div className="absolute -left-6 top-0 hidden h-full w-1 rounded-full bg-gradient-to-b from-orange-500 via-amber-500 to-transparent opacity-80 lg:block blur-[1px]"></div>
 
-              {/* Status Badge - Reduced desktop bottom margin (lg:mb-3) */}
+              {/* Status Badge */}
               <div 
                 className="mb-3 max-[380px]:mb-2 max-h-[740px]:mb-1 md:mb-5 lg:mb-3 inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1.5 opacity-0 backdrop-blur-sm shadow-[0_0_15px_rgba(249,115,22,0.15)]"
                 style={{ animation: "fadeIn 0.8s ease-out 0.1s forwards" }}
@@ -64,7 +63,7 @@ export default function About() {
                 </span>
               </div>
 
-              {/* Main Heading - Reduced desktop bottom margin (lg:mb-3) */}
+              {/* Main Heading*/}
               <h2 className="mb-3 max-[380px]:mb-2 max-h-[740px]:mb-1 md:mb-5 lg:mb-3 text-3xl max-[380px]:text-[26px] max-h-[740px]:text-[24px] sm:text-4xl lg:text-5xl leading-[1.2] lg:leading-[1.15] font-bold tracking-tight text-white drop-shadow-sm w-full">
                 Innovating for a
                 <br />
@@ -73,7 +72,7 @@ export default function About() {
                 </span>
               </h2>
 
-              {/* Description - Tightened desktop gaps (lg:gap-2) */}
+              {/* Description*/}
               <div className="font-inter flex flex-col w-full gap-3 max-[380px]:gap-2 max-h-[740px]:gap-1.5 md:gap-4 lg:gap-2 text-[13px] max-[380px]:text-[12px] max-h-[740px]:text-[11px] sm:text-base leading-relaxed text-gray-300/90 max-w-md sm:max-w-xl mx-auto lg:mx-0">
                 <p className="opacity-0 break-words w-full" style={{ animation: "fadeIn 0.8s ease-out 0.3s forwards" }}>
                   <strong className="font-semibold text-white">Algorithm X</strong> is our signature 32-hour hackathon designed to push the boundaries of technology. 
@@ -95,14 +94,13 @@ export default function About() {
 <div className="group relative w-[95%] max-w-[340px] lg:max-w-none lg:w-[380px] h-[48px] sm:h-[44px] lg:h-[48px] flex items-center overflow-hidden rounded-lg border border-orange-500/40 bg-neutral-900/90 shadow-[0_0_15px_rgba(249,115,22,0.15)] backdrop-blur-md">
   <div className="absolute inset-0 w-[200%] translate-x-[-100%] bg-gradient-to-r from-transparent via-orange-500/10 to-transparent transition-transform duration-1000 group-hover:translate-x-[100%]" />
   
-  {/* Shrunk mobile padding (px-2 instead of px-3) to give the goal text more horizontal space */}
+  {/* Shrunk mobile */}
   <div className="relative flex h-full shrink-0 items-center justify-center border-r border-orange-500/40 bg-orange-500/20 px-2 lg:px-4">
     <span className="font-cyber font-black text-[10px] lg:text-[11px] tracking-wider text-orange-300 uppercase">
       SDG GOAL'S
     </span>
   </div>
 
-  {/* Reduced mobile horizontal padding to px-1 to maximize text area */}
   {/* Text Container */}
 <div className="relative flex h-full flex-1 items-center justify-center px-1 sm:px-4 overflow-hidden">
   <AnimatePresence mode="popLayout">
@@ -125,7 +123,6 @@ export default function About() {
 </div>
 
   {/* Action Button */}
-  {/* FIXED: Added lg:w-[380px] lg:min-w-0 lg:h-[48px] for uniform desktop size */}
   <button
     className="font-cyber group relative w-[95%] max-w-[340px] sm:max-w-none sm:w-auto lg:w-[380px] lg:min-w-0 h-[48px] sm:h-[46px] lg:h-[48px] overflow-hidden rounded-lg border border-orange-500 bg-gradient-to-r from-orange-600 to-orange-700 px-8 text-sm font-bold text-white shadow-[0_0_20px_rgba(255,140,66,0.3)] transition-all hover:scale-105 active:scale-95 flex items-center justify-center whitespace-nowrap"
     onClick={() => (window.location.href = "https://unstop.com")}

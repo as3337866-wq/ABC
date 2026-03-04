@@ -182,7 +182,6 @@ export default function Sponsors() {
           </div>
         </div>
 
-        {/* --- UPDATED: Flexbox Container for dynamic centering --- */}
         <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-12">
           {sponsors.map((sponsor, index) => (
             <SponsorCard key={index} {...sponsor} delay={0.1 * index} />

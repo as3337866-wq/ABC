@@ -6,29 +6,57 @@ import * as THREE from "three";
 
 const ImageSequenceBackground = () => {
   const [currentFrame, setCurrentFrame] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
   const totalFrames = 192;
 
+  // Preload all images on mount
   useEffect(() => {
+    const preloadImages = async () => {
+      const promises = [];
+      
+      for (let i = 0; i < totalFrames; i++) {
+        const frameString = String(i).padStart(3, "0");
+        const src = `/herosection/frame_${frameString}_delay-0.041s.webp`;
+        
+        promises.push(
+          new Promise((resolve) => {
+            const img = new Image();
+            img.src = src;
+            // Resolve the promise whether it loads successfully or fails
+            // (this prevents the whole sequence from freezing if 1 frame drops)
+            img.onload = resolve;
+            img.onerror = resolve; 
+          })
+        );
+      }
+      
+      // Wait for all 192 images to finish downloading
+      await Promise.all(promises);
+      setIsLoaded(true);
+    };
+
+    preloadImages();
+  }, []);
+
+  // Start the animation ONLY after all images are preloaded
+  useEffect(() => {
+    if (!isLoaded) return; // Do nothing if not loaded
+
     const speedMs = 90; 
     const interval = setInterval(() => {
       setCurrentFrame((prev) => (prev + 1) % totalFrames);
     }, speedMs);
+    
     return () => clearInterval(interval);
-  }, []);
+  }, [isLoaded]); 
 
   const frameString = String(currentFrame).padStart(3, "0");
   const imageSrc = `/herosection/frame_${frameString}_delay-0.041s.webp`;
 
-  useEffect(() => {
-    const nextFrameString = String((currentFrame + 1) % totalFrames).padStart(3, "0");
-    const img = new Image();
-    img.src = `/herosection/frame_${nextFrameString}_delay-0.041s.webp`;
-  }, [currentFrame]);
-
   return (
     <div className="absolute inset-0 z-0 h-full w-full bg-neutral-950">
       <img
-        src={imageSrc}
+        src={isLoaded ? imageSrc : `/herosection/frame_000_delay-0.041s.webp`}
         alt="Animated Background"
         className="h-full w-full object-cover opacity-40" 
       />
@@ -380,7 +408,6 @@ const CountdownTimer = ({ targetDate }) => {
 };
 
 export default function Hero() {
-  // CHANGED: We now track scroll on an invisible spacer element instead of the hero section
   const spacerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: spacerRef,
@@ -410,10 +437,6 @@ export default function Hero() {
 
   return (
     <>
-      {/* CHANGED: This section is now `fixed inset-0 z-0`. 
-        This pins it directly to the background of the screen. 
-        As the user scrolls, it will not move, creating the "curtain" effect. 
-      */}
 <div className="sticky top-0 z-0 flex h-[100dvh] w-full items-center overflow-hidden bg-neutral-950">
         <ImageSequenceBackground />
         <ThreeBackground />
@@ -423,7 +446,6 @@ export default function Hero() {
           style={{ opacity, scale }}
           className="relative z-20 flex h-full w-full items-center justify-center px-4 sm:px-6 lg:px-8"
         >
-          {/* CHANGED: Dialed back the top margin so the content stays beautifully centered */}
           <div className="mx-auto w-full max-w-7xl mt-8 md:mt-10">
             <div className="grid items-center gap-4 sm:gap-8 lg:grid-cols-2 lg:gap-12">
               
@@ -435,13 +457,10 @@ export default function Hero() {
                 className="order-1 flex flex-col items-center lg:items-start"
               >
                 <div className="relative">
-                  {/* CHANGED: Scaled the logo size down slightly so it fits better vertically */}
                   <AnimatedLogo className="relative h-20 w-16 sm:h-28 sm:w-24 md:h-36 md:w-32 lg:h-48 lg:w-44 xl:h-52 xl:w-48" />
                 </div>
 
-                {/* CHANGED: Reduced the top margin so the text sits tighter to the logo */}
                 <div className="mt-0 text-center lg:text-left sm:mt-1">
-                  {/* CHANGED: Reduced max text size from 8xl to 7xl to stop it from being too massive */}
                   <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -595,12 +614,7 @@ export default function Hero() {
           </div>
         </motion.div>
       </div>
-
-      {/* CHANGED: This is an invisible spacer element that takes up exactly one screen height.
-        Since the actual hero visual is now fixed, this spacer pushes the "About" section 
-        down by 100vh so it starts exactly below the fold. 
-        It also tracks the scroll progress for your Framer Motion fade out effect.
-      */}
+      
       <div 
         ref={spacerRef} 
         className="pointer-events-none relative z-0 h-[100dvh] w-full" 
